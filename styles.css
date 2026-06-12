@@ -402,7 +402,11 @@ img {
     linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(5, 5, 5, 0.92)),
     url("assets/sports/sports%20hero%20photo.png") center / cover no-repeat;
 }
-.page-hero.music { background-position: 8% 22%; }
+.page-hero.music {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(5, 5, 5, 0.92)),
+    url("assets/music/kobe2.jpg") 8% 22% / cover no-repeat;
+}
 
 /* Weddings-specific typography (only affects Weddings page) */
 .page-hero.weddings .page-copy h1,
@@ -831,6 +835,11 @@ img {
   gap: clamp(16px, 3.2vw, 34px);
   border-top: 1px solid var(--soft-line);
   padding-top: 22px;
+}
+
+.music-episode:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
 /* Alternate sides for the media */
