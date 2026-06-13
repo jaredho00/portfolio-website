@@ -420,7 +420,9 @@ img {
 .frame.film-6 {
   background-size: contain;
   background-position: center center;
-ame.film-1 {
+}
+
+.frame.film-1 {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.34)),
     url("assets/filmmaking-01.png");
