@@ -1,0 +1,6 @@
+- [ ] Add one-time (tab session) fade+expand animation for home hero “Jared Ho” logo
+  - [ ] Update `styles.css` with hidden initial state + animation styles for `.hero-title` (opacity/transform)
+  - [ ] Update `parallax.js` to add a class to `.hero`/`.hero-title` only once per tab session using `sessionStorage`
+- [ ] Verify behavior
+  - [ ] Refresh `/index.html`: animation runs after ~0.5s
+  - [ ] Navigate away and back (back/forward): animation does NOT re-run

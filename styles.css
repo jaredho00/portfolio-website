@@ -92,11 +92,13 @@ img {
   font-size: 0.86rem;
   color: rgba(245, 245, 241, 0.75);
   text-transform: uppercase;
+  font-family: Arial, sans-serif;
 }
 
 .nav a {
   position: relative;
   padding-block: 4px;
+  font-family: Arial, sans-serif;
 }
 
 .nav a::after {
@@ -133,9 +135,25 @@ img {
   position: absolute;
   inset: 0;
   z-index: -3;
+
+  background: url("assets/loading.jpg") center / cover no-repeat;
+  filter: contrast(1.03) brightness(0.95) saturate(1.05);
+  transform: scale(1.03);
+
+  opacity: 1;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Zoom and dissolve the loading image */
+.hero.is-video-starting::before {
+  opacity: 0;
+  transform: scale(1.08);
+}
+
+/* Swap to the ocean hero background once the dissolve begins/finishes */
+.hero.is-video-playing::before {
   background: url("assets/ocean-hero-clean.png") center / cover no-repeat;
-  filter: grayscale(1) contrast(1.12) brightness(0.74);
-  transform: scale(1.012);
+  opacity: 1;
 }
 
 .hero-video {
@@ -146,10 +164,16 @@ img {
   height: calc(100% + 16vh);
   object-fit: cover;
   object-position: center;
-  filter: contrast(1.06) brightness(0.62) saturate(1.08);
+  filter: contrast(1.06) brightness(0.68) saturate(1.08);
   transform: translate3d(0, var(--hero-parallax, 0px), 0) scale(1.04);
   transform-origin: center;
-  will-change: transform;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.7s ease 0.05s;
+}
+
+.hero.is-video-starting .hero-video {
+  opacity: 1;
 }
 
 .hero::after {
@@ -158,8 +182,19 @@ img {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(6, 7, 6, 0.72), rgba(6, 7, 6, 0.14) 36%, rgba(6, 7, 6, 0.82) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 34%, transparent 68%, rgba(0, 0, 0, 0.5));
+    linear-gradient(180deg, rgba(6, 7, 6, 0.58), rgba(6, 7, 6, 0.14) 36%, rgba(6, 7, 6, 0.68) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 34%, transparent 68%, rgba(0, 0, 0, 0.38));
+}
+
+@keyframes heroLogoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-title {
@@ -173,7 +208,8 @@ img {
   text-align: center;
   color: #fff;
   text-shadow: 0 8px 38px rgba(0, 0, 0, 0.38);
-  transform: translateY(-30px);
+  opacity: 0;
+  animation: heroLogoFadeIn 900ms ease-out 0ms both;
 }
 
 .hero-title span {
@@ -183,6 +219,12 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     transform: scale(1.04);
+  }
+
+  .hero-title {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 
@@ -221,6 +263,66 @@ img {
   grid-column: 2;
 }
 
+.reveal-item {
+  opacity: 0;
+  transform: translateY(42px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-card,
+.category-link {
+  opacity: 0;
+  transform: translateY(42px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+  transition-delay: calc(var(--reveal-index, 0) * 0.07s + 0.12s);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-revealed .work-card,
+.reveal-item.is-revealed .category-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-card,
+.category-link {
+  position: relative;
+}
+
+.work-card::before,
+.category-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  pointer-events: none;
+}
+
+.reveal-item.is-revealed .work-card::before,
+.reveal-item.is-revealed .category-link::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item,
+  .work-card,
+  .category-link {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .section-heading h2 {
   margin: 0;
   font-family: "Courier New", Courier, monospace;
@@ -233,6 +335,23 @@ img {
   margin: 0;
   color: var(--muted);
   font-size: 0.86rem;
+  text-transform: uppercase;
+}
+
+/* HOME PAGE: subtitles */
+.hero-meta {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+#work .section-heading p,
+#work + section .section-heading p {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.category-strip small {
+  font-family: Arial, sans-serif;
   text-transform: uppercase;
 }
 
@@ -273,6 +392,13 @@ img {
 
 .work-kicker b {
   font-weight: 400;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.work-kicker span {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
 }
 
 .frame {
@@ -294,9 +420,7 @@ img {
 .frame.film-6 {
   background-size: contain;
   background-position: center center;
-}
-
-.frame.film-1 {
+ame.film-1 {
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.34)),
     url("assets/filmmaking-01.png");
@@ -515,7 +639,8 @@ img {
 
 .page-copy h1 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
   font-size: clamp(4rem, 9vw, 11rem);
   font-weight: 400;
   line-height: 0.84;
