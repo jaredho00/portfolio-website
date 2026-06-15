@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact - Jared Ho</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .contact-linkbox {
+        transition: transform 200ms ease;
+      }
+      .contact-linkbox:hover {
+        transform: scale(1.08);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand-mark" href="index.html">JARED HO</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="filmmaking.html">Filmmaking</a>
+        <a href="weddings.html">Weddings</a>
+        <a href="sports.html">Sports</a>
+        <a href="music.html">Music</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <main style="height: 100vh; overflow: hidden; display:flex; flex-direction:column;">
+        <section class="section" style="padding-top: 0; flex: 0 0 45vh; overflow: hidden; display:flex; align-items:center;">
+          <div style="height: 45vh; display:flex; align-items:center; justify-content:center; text-align:center; padding: 0 16px;">
+            <a
+              class="contact-linkbox"
+              href="https://linktr.ee/jaredho"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display:grid; place-items:center; border: 1px solid var(--line); padding: 12px 18px; text-decoration:none; color: inherit; width: fit-content; max-width: 100%;"
+              aria-label="Open Linktree"
+            >
+              <span style="font-family: 'Courier New', Courier, monospace; text-transform: uppercase; font-weight: 400; font-style: normal; font-size: clamp(1.6rem, 3.6vw, 2.4rem); line-height: 1.1;">
+                CONTACT
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section contact-band" id="send" style="padding-top: 10px;">
+          <div class="contact-inner reveal-item" style="grid-template-columns: 0.78fr 1.22fr; gap: 34px;">
+            <!-- Left: submit button in a grid -->
+            <div style="display:grid; grid-template-rows: auto 1fr; gap: 16px; align-content:start;">
+              <h2 style="margin: 0; font-family: 'Courier New', Courier, monospace; font-weight: 400; text-transform: lowercase; font-size: clamp(1.6rem, 3.4vw, 2.1rem);">
+                submit
+              </h2>
+
+              <div style="border: 1px solid var(--line); padding: 18px; display:grid; grid-template-columns: 1fr; gap: 14px;">
+                <form id="contactForm" class="contact-form" autocomplete="on" style="display: grid; gap: 16px;">
+                  <button
+                    type="submit"
+                    style="border: 1px solid rgba(123, 163, 255, 0.85); padding: 14px 16px; background: var(--accent); color: #0b0c0f; text-transform: uppercase; cursor: pointer; font-family: 'Courier New', Courier, monospace; letter-spacing: 0.02em;"
+                  >
+                    submit
+                  </button>
+
+                  <div style="border-top: 1px solid var(--line); padding-top: 14px;">
+                    <p style="margin:0; color: var(--muted); font-size: 0.86rem; text-transform: uppercase; line-height: 1.6;">
+                      Clicking submit opens your email client.
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Right: message textbox -->
+            <div style="display:flex; flex-direction:column; gap: 14px;">
+              <h2 style="margin: 6px 0 0; font-family: 'Courier New', Courier, monospace; font-weight: 400; text-transform: lowercase; font-size: clamp(1.6rem, 3.4vw, 2.1rem);">
+                send message
+              </h2>
+
+              <div style="border: 1px solid var(--line); padding: 18px;">
+                <label for="message" style="display:block; color: rgba(245, 245, 241, 0.86); text-transform: uppercase; font-size: 0.86rem; font-family: 'Courier New', Courier, monospace;">
+                  message
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="6"
+                  placeholder="Write your message..."
+                  form="contactForm"
+                  style="width:100%; margin-top:8px; padding:12px 14px; border:1px solid var(--line); background: transparent; color: var(--paper); outline: none; border-radius: 4px; font-family: 'Courier New', Courier, monospace; text-transform: lowercase;"
+                ></textarea>
+
+                <div style="margin-top: 18px; display:flex; gap: 14px; flex-wrap:wrap;">
+                  <a
+                    class="contact-email"
+                    style="border: 1px solid var(--line); padding: 12px 16px; background: transparent; color: rgba(245, 245, 241, 0.86); text-transform: uppercase; font-family: Arial, sans-serif;"
+                    href="mailto:jaredjkho@gmail.com?subject=&body="
+                  >
+                    or email: jaredjkho@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div style="margin-top: 24px;">
+                <h2 style="margin: 0 0 18px; font-family: Georgia, "Times New Roman", serif; font-weight: 400;">
+                  Socials
+                </h2>
+
+                <a
+                  class="contact-email"
+                  style="border: 1px solid var(--line); padding: 12px 16px; display: inline-block; text-transform: uppercase; color: rgba(245, 245, 241, 0.86);"
+                  href="https://linktr.ee/jaredho"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open linktr.ee
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+    <script>
+      (function () {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const name = (document.getElementById('name').value || '').trim();
+          const email = (document.getElementById('email').value || '').trim();
+          const message = (document.getElementById('message').value || '').trim();
+
+          const to = 'jaredjkho@gmail.com';
+          const subject = `Message from ${name || 'someone'} (${email || 'email not provided'})`;
+          const body =
+            `Name: ${name || '—'}\n` +
+            `Email: ${email || '—'}\n\n` +
+            `Message:\n${message || '—'}\n`;
+
+          const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          // Navigate to mailto to open the compose window.
+          window.location.href = mailto;
+        });
+      })();
+    </script>
+  </body>
+</html>
