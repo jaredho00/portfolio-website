@@ -23,17 +23,20 @@
         <section class="hero" aria-label="Jared Ho portfolio home">
           <video
             class="hero-video"
-            src="assets/reel low res.mov"
+            src="assets/Jared%20Ho%20Reel%20low%20res.mov"
             muted
             loop
             playsinline
             preload="metadata"
           ></video>
 
-          <h1 class="hero-title"><span>Jared</span><span>Ho</span></h1>
-          <div class="hero-meta">
-            <span>Director - Cinematographer - Editor</span>
-            <span>Selected work across film, weddings, sports, and music</span>
+          <div class="hero-bottom">
+            <a class="hero-button" href="https://youtu.be/w297Os14MUQ?si=PJ7GxLQihWV8IA3o" target="_blank" rel="noreferrer noopener">2025 Cinematography Reel</a>
+
+            <div class="hero-meta">
+              <span>Director - Cinematographer - Editor</span>
+              <span>Selected work across film, weddings, sports, and music</span>
+            </div>
           </div>
         </section>
 
@@ -99,9 +102,19 @@
                 ></video>
               </div>
             </a>
-            <a class="work-card" href="https://youtu.be/lXyuVSX7hH8" target="_blank" rel="noreferrer noopener">
+            <a class="work-card" href="https://youtu.be/4SXhPrMc_Ls" target="_blank" rel="noreferrer noopener">
               <div class="work-kicker"><b>04</b><span>NBPA</span></div>
-              <div class="frame empty-frame"></div>
+              <div class="frame music-1 nbpa-thumb">
+                <img src="assets/NBPA%20thumbnail.png" alt="NBPA thumbnail">
+                <video
+                  class="work-preview-video nbpa-video"
+                  src="assets/nbpa%20hover%20preview%20trim.mp4"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+              </div>
             </a>
             <a class="work-card rebate-card" href="https://youtu.be/MbT9DCtff7w" target="_blank" rel="noreferrer noopener">
               <div class="work-kicker"><b>05</b><span>Rebate</span></div>
@@ -286,6 +299,30 @@
           parent.addEventListener('mouseenter', safePlay);
           parent.addEventListener('mouseleave', safePause);
         }
+      })();
+
+      (function () {
+        const card = document.querySelector('.nbpa-thumb')?.closest('.work-card');
+        const video = card && card.querySelector('.nbpa-video');
+        if (!card || !video) return;
+
+        function safePlay() {
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          const promise = video.play();
+          if (promise && typeof promise.catch === 'function') promise.catch(() => {});
+        }
+
+        function safePause() {
+          video.pause();
+          try { video.currentTime = 0; } catch (e) {}
+        }
+
+        card.addEventListener('pointerenter', safePlay);
+        card.addEventListener('pointerleave', safePause);
+        card.addEventListener('mouseenter', safePlay);
+        card.addEventListener('mouseleave', safePause);
       })();
     </script>
   </body>

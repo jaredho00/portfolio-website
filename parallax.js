@@ -27,24 +27,22 @@ window.addEventListener("scroll", requestHeroParallax, { passive: true });
 window.addEventListener("resize", requestHeroParallax);
 
 if (video) {
-  const startDelayMs = 1000; // show loading.jpg immediately, then dissolve after 1 second
   let hasActivated = false;
 
   const startHeroVideo = () => {
     if (hasActivated) return;
     hasActivated = true;
 
-    // begin dissolve from the photo into the video
     hero?.classList.add("is-video-starting");
+    hero?.classList.add("is-video-playing");
 
-    // start playback once the visual transition begins
     video.muted = true;
+    video.autoplay = true;
+    video.setAttribute("playsinline", "true");
     video.play().catch(() => {});
   };
 
-  setTimeout(() => {
-    if (!document.hidden) startHeroVideo();
-  }, startDelayMs);
+  if (!document.hidden) startHeroVideo();
 
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) startHeroVideo();
