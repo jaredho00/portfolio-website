@@ -1374,6 +1374,38 @@ img {
 }
 
 @media (max-width: 720px) {
+  .music-episode:first-child .music-episode-media {
+    order: 1;
+  }
+
+  .music-episode:first-child .music-episode-copy {
+    order: 2;
+  }
+
+  #work .work-wall {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #work .work-card {
+    grid-column: 1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .page-hero.weddings ~ .section.detail-grid .gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding: 16px 0;
+  }
+
+  .page-hero.filmmaking ~ .section.detail-grid .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-hero.filmmaking ~ .section.detail-grid .project-grid article {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
   .sports-stagger-container {
     gap: 50px;
   }
@@ -1382,6 +1414,19 @@ img {
     flex-direction: column;
     justify-content: center !important;
     gap: 16px;
+  }
+
+  .sports-item > a {
+    display: block;
+    width: min(100%, 360px);
+  }
+
+  .sports-item-2 > a {
+    order: 1;
+  }
+
+  .sports-item-2 .sports-caption {
+    order: 2;
   }
 
   .sports-photo {
@@ -1516,6 +1561,26 @@ img {
   color: rgba(245, 245, 241, 0.88);
   text-transform: uppercase;
   font-size: 0.9rem;
+}
+
+@media (min-width: 1051px) {
+  .music-episode:first-child {
+    column-gap: 12px;
+  }
+
+  .music-episode:first-child .music-episode-media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .music-episode:first-child .music-episode-copy {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    width: max-content;
+    margin-right: 24px;
+    text-align: right;
+  }
 }
 
 @media (max-width: 1050px) {
