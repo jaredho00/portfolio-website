@@ -387,34 +387,36 @@ img {
 
 .work-wall {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   border-left: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: #000;
+  width: 100%;
 }
 
 .work-card {
-  min-height: 310px;
+  position: relative;
+  aspect-ratio: 2.35 / 1;
+  min-height: 0;
   border-top: 1px solid var(--line);
   border-right: 1px solid var(--line);
   padding: 0;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0;
+  display: block;
   background: #000;
+  overflow: hidden;
 }
 
 .work-card:first-child {
-  grid-column: span 2;
-  min-height: 440px;
+  grid-column: span 1;
+  min-height: 0;
 }
 
 .work-card:nth-child(2) {
-  min-height: 440px;
+  min-height: 0;
 }
 
 .work-card:nth-child(n + 3) {
-  min-height: 300px;
+  min-height: 0;
 }
 
 .work-card.wide {
@@ -422,33 +424,60 @@ img {
 }
 
 .work-card.long {
-  min-height: 300px;
+  min-height: 0;
 }
 
 .work-kicker {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   display: flex;
-  gap: 10px;
-  align-items: baseline;
-  padding: 12px 14px 10px;
-  color: rgba(245, 245, 241, 0.88);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: rgba(245, 245, 241, 0.92);
   font-size: 0.88rem;
   text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.62));
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
 }
 
 .work-kicker b {
-  font-weight: 400;
-  font-family: Arial, sans-serif;
-  text-transform: uppercase;
+  display: none;
 }
 
 .work-kicker span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: Arial, sans-serif;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.work-card .work-kicker {
+  align-items: center;
+}
+
+.work-card:hover .work-kicker,
+.work-card:focus-within .work-kicker {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .frame {
-  position: relative;
-  min-height: 230px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: 2.35 / 1;
   overflow: hidden;
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.42)),
@@ -461,6 +490,7 @@ img {
 
 .work-card .frame {
   min-height: 100%;
+  height: 100%;
 }
 
 .work-card.film-preview-card .frame {
@@ -481,7 +511,8 @@ img {
 }
 
 .work-card.film-preview-card .work-kicker {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
 }
 
@@ -587,7 +618,7 @@ img {
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2.35 / 1;
   background: none;
 }
 
@@ -776,7 +807,11 @@ img {
 
 /* Apply same subtle hover-expand to project frames (Filmmaking etc.) */
 .project-link {
+  position: relative;
   display: block;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 .project .frame {
@@ -866,7 +901,7 @@ img {
 }
 
 .project-grid article:nth-child(3) {
-  grid-column: 1 / 2;
+  grid-column: 2 / 3;
   grid-row: 2 / 3;
 }
 
@@ -881,6 +916,11 @@ img {
   overflow: hidden;
 }
 
+.project-no-copy {
+  grid-template-rows: auto 1fr;
+  min-height: 500px;
+}
+
 .work-kicker {
   display: flex;
   gap: 10px;
@@ -892,9 +932,11 @@ img {
 
 .project .frame {
   aspect-ratio: 16 / 9;
-  width: 92%;
-  max-width: 720px;
+  width: 100%;
   margin: 0 auto;
+  min-height: 0;
+  background-size: cover;
+  background-position: center center;
 }
 
 .project p {
@@ -910,6 +952,23 @@ img {
   font-size: 0.95rem;
 }
 
+.project-link .work-kicker {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.project-link:hover .work-kicker,
+.project-link:focus-visible .work-kicker {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* Filmmaking page styling */
 .page-hero.filmmaking .page-copy p {
   font-family: "Courier New", Courier, monospace;
@@ -919,6 +978,168 @@ img {
 .page-hero.filmmaking ~ .section.detail-grid .project p {
   font-family: "Courier New", Courier, monospace;
   text-transform: none;
+}
+
+.project-detail-page {
+  padding-bottom: 90px;
+}
+
+.detail-hero {
+  min-height: 42svh;
+  padding: 150px clamp(20px, 3.4vw, 70px) 46px;
+  display: grid;
+  align-items: end;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(5, 5, 5, 0.9)),
+    url("assets/filmmaking-01.jpg") center / cover no-repeat;
+}
+
+.detail-copy {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: min(100%, 1120px);
+}
+
+.detail-copy .eyebrow {
+  margin: 0 0 12px;
+  color: rgba(245, 245, 241, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+}
+
+.detail-copy h1 {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(2.8rem, 6vw, 7.4rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.project-detail-shell {
+  width: min(100%, 1220px);
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 80px) clamp(20px, 3.4vw, 70px) 0;
+}
+
+.video-frame {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 1120px);
+  margin: 0 auto 28px;
+  border: 1px solid var(--line);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.project-summary {
+  width: min(100%, 980px);
+  margin: 0 auto 42px;
+  color: rgba(245, 245, 241, 0.75);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.credit-grid {
+  width: min(100%, 980px);
+  margin: 0 auto 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  color: rgba(245, 245, 241, 0.82);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.credit-card {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.credit-card span {
+  color: rgba(245, 245, 241, 0.62);
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+.credit-card strong {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--paper);
+}
+
+.stills-grid {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.still-box {
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.4)),
+    url("assets/filmmaking-01.png") center / cover no-repeat;
+  justify-self: center;
+}
+
+.timed-out-gallery .still-box:nth-child(1) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.18.43%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(2) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.19.08%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(3) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.19.40%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(4) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.20.00%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(5) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.20.49%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(6) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.21.22%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(7) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.22.02%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(8) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.24.32%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(9) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.25.03%E2%80%AFPM.png"); }
+.timed-out-gallery .still-box:nth-child(10) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/timed%20out%20stills/Screenshot%202026-10-27%20at%208.26.52%E2%80%AFPM.png"); }
+
+.still-box:nth-child(1) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-01.png"); }
+.still-box:nth-child(2) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-02.png"); }
+.still-box:nth-child(3) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-03.png"); }
+.still-box:nth-child(4) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-04.png"); }
+.still-box:nth-child(5) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-05.png"); }
+.still-box:nth-child(6) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-06.png"); }
+.still-box:nth-child(7) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-01.png"); }
+.still-box:nth-child(8) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-02.png"); }
+.still-box:nth-child(9) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-03.png"); }
+.still-box:nth-child(10) { background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.38)), url("assets/filmmaking-04.png"); }
+
+@media (max-width: 900px) {
+  .credit-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .stills-grid {
+    width: min(100%, 620px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .still-box {
+    max-width: 100%;
+  }
 }
 
 .about-section {
@@ -1217,8 +1438,33 @@ img {
 }
 
 .music-episode-media {
+  position: relative;
   display: block;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
+}
+
+.music-thumb-title {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: rgba(245, 245, 241, 0.96);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.62));
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 2vw, 1.8rem);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.music-episode-media:hover .music-thumb-title,
+.music-episode-media:focus-visible .music-thumb-title {
+  opacity: 1;
 }
 
 .music-episode-media .frame {
@@ -1243,14 +1489,18 @@ img {
 
 .music-episode-copy {
   padding-bottom: 6px;
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.music-episode-copy .work-kicker {
-  justify-content: center;
+.music-credits p {
+  margin: 0;
+  color: rgba(245, 245, 241, 0.82);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.7;
 }
 
 .music-episode-copy p {

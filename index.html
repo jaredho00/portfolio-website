@@ -40,28 +40,14 @@
           </div>
         </section>
 
-        <section class="section about-section reveal-item" aria-labelledby="about-heading">
-          <div class="about-photo">
-            <img src="assets/website Jared.jpg" alt="Jared Ho holding a camera on a beach">
-          </div>
-          <div class="about-copy">
-            <small>About</small>
-            <h2 id="about-heading">About Me</h2>
-            <p>
-              I'm Jared, a cinematographer and filmmaker from Los Angeles, California. I've grown up making all kinds of films including sports, narratives, documentaries, weddings, and many more. I want to tell captivating stories in an intentional and cinematic way.
-            </p>
-            <a class="about-link" href="https://linktr.ee/jaredho" target="_blank" rel="noreferrer noopener">Work with me</a>
-          </div>
-        </section>
-
         <section class="section" id="work">
           <div class="section-heading reveal-item">
             <h2>Featured Work</h2>
             <p>Index / 2026</p>
           </div>
           <div class="work-wall reveal-item">
-            <a class="work-card wide film-preview-card" href="https://youtu.be/lXyuVSX7hH8" target="_blank" rel="noreferrer noopener">
-              <div class="work-kicker"><b>01</b><span>Featured Work - Weleh</span></div>
+            <a class="work-card wide film-preview-card" href="project-weleh.html">
+              <div class="work-kicker"><span>Featured Work - Weleh</span></div>
               <div class="frame weleh-thumb">
                 <video
                   class="work-preview-video weleh-video"
@@ -74,8 +60,8 @@
                 ></video>
               </div>
             </a>
-            <a class="work-card" href="https://www.youtube.com/watch?v=7UpYTKVxpU8" target="_blank" rel="noreferrer noopener">
-              <div class="work-kicker"><b>02</b><span>Timed Out</span></div>
+            <a class="work-card" href="project-timed-out.html">
+              <div class="work-kicker"><span>Timed Out</span></div>
               <div class="frame music-1 timedout-thumb">
                 <img src="assets/timed%20out%20thumbnail.png" alt="Timed Out thumbnail">
                 <video
@@ -88,8 +74,8 @@
                 ></video>
               </div>
             </a>
-            <a class="work-card perfect-note-card" href="https://www.youtube.com/watch?v=FwJv4HfeNn8&feature=youtu.be" target="_blank" rel="noreferrer noopener">
-              <div class="work-kicker"><b>03</b><span>The Perfect Note</span></div>
+            <a class="work-card perfect-note-card" href="project-the-perfect-note.html">
+              <div class="work-kicker"><span>The Perfect Note</span></div>
               <div class="frame music-1 perfect-note-thumb">
                 <img src="assets/Screenshot%202026-04-22%20at%2010.48.18%E2%80%AFPM.png" alt="The Perfect Note thumbnail">
                 <video
@@ -102,8 +88,8 @@
                 ></video>
               </div>
             </a>
-            <a class="work-card" href="https://youtu.be/4SXhPrMc_Ls" target="_blank" rel="noreferrer noopener">
-              <div class="work-kicker"><b>04</b><span>NBPA</span></div>
+            <a class="work-card" href="project-nbpa.html">
+              <div class="work-kicker"><span>NBPA</span></div>
               <div class="frame music-1 nbpa-thumb">
                 <img src="assets/NBPA%20thumbnail.png" alt="NBPA thumbnail">
                 <video
@@ -116,8 +102,8 @@
                 ></video>
               </div>
             </a>
-            <a class="work-card rebate-card" href="https://youtu.be/MbT9DCtff7w" target="_blank" rel="noreferrer noopener">
-              <div class="work-kicker"><b>05</b><span>Rebate</span></div>
+            <a class="work-card rebate-card" href="project-rebate.html">
+              <div class="work-kicker"><span>Rebate</span></div>
               <div class="frame music-1 rebate-thumb">
                 <img src="assets/Screenshot%202026-08-26%20at%2012.38.22%E2%80%AFAM.png" alt="Rebate thumbnail">
                 <video
@@ -130,6 +116,34 @@
                 ></video>
               </div>
             </a>
+            <a class="work-card revolucionario-card" href="project-music-revolucionario.html">
+              <div class="work-kicker"><span>Revolucionario</span></div>
+              <div class="frame music-1 revolucionario-thumb">
+                <img src="assets/music/luis.png" alt="Revolucionario thumbnail">
+                <video
+                  class="work-preview-video revolucionario-video"
+                  src="assets/revolucionario-preview.mp4"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="section about-section reveal-item" aria-labelledby="about-heading">
+          <div class="about-photo">
+            <img src="assets/website Jared.jpg" alt="Jared Ho holding a camera on a beach">
+          </div>
+          <div class="about-copy">
+            <small>About</small>
+            <h2 id="about-heading">About Me</h2>
+            <p>
+              I'm Jared, a cinematographer and filmmaker from Los Angeles, California. I've grown up making all kinds of films including sports, narratives, documentaries, weddings, and many more. I want to tell captivating stories in an intentional and cinematic way.
+            </p>
+            <a class="about-link" href="https://linktr.ee/jaredho" target="_blank" rel="noreferrer noopener">Work with me</a>
           </div>
         </section>
 
@@ -305,6 +319,32 @@
         const card = document.querySelector('.nbpa-thumb')?.closest('.work-card');
         const video = card && card.querySelector('.nbpa-video');
         if (!card || !video) return;
+
+        function safePlay() {
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          const promise = video.play();
+          if (promise && typeof promise.catch === 'function') promise.catch(() => {});
+        }
+
+        function safePause() {
+          video.pause();
+          try { video.currentTime = 0; } catch (e) {}
+        }
+
+        card.addEventListener('pointerenter', safePlay);
+        card.addEventListener('pointerleave', safePause);
+        card.addEventListener('mouseenter', safePlay);
+        card.addEventListener('mouseleave', safePause);
+      })();
+
+      (function () {
+        const card = document.querySelector('.revolucionario-card');
+        if (!card) return;
+
+        const video = card.querySelector('.revolucionario-video');
+        if (!video) return;
 
         function safePlay() {
           video.muted = true;
